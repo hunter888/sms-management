@@ -1,0 +1,59 @@
+import humod
+import requests
+import time
+import json
+
+
+URL_GETPORT = "http://127.0.0.1:8081/get_port"
+URL_GETOUTBOX = "http://127.0.0.1:8081/get_outbox"
+URL_DELETEOUTBOX = "http://127.0.0.1:8081/delete_outbox?id="
+
+
+MODEM_FLAG = 0
+
+def getCurrentComPort ():
+    r = requests.get(URL_GETPORT)
+	return r.text
+
+
+
+def getOutboxMessages():
+    r = requests.get(URL_GETOUTBOX)
+	return json.loads(r.text)
+
+def deleteOutbox (data_id):
+    r = requests.get("%s%d" % (URL_DELETEOUTBOX, data_id) )
+	return r.text
+    
+
+def initModem(comport):
+	m = humod.Modem(comport, comport)
+	try :
+	    model = m.show_model()
+		if (model != None):
+		    MODEM_FLAG = 1
+	        print "Modem found"
+			return m
+        else:
+		    MODEM_FLAG = 0
+	        print "No modem found"
+     except ValueError:
+	    print "No modem found"
+     return None
+
+def main():
+	m_humod = None
+    while(1):
+	    if (MODEM_FLAG):
+            print "modem is ok"
+        else:
+			print "modem not ok"
+            comport = getCurrentComPort()
+            m_humod = initModem(comport)
+			if (m_humod == None):
+			    print "No modem found. trying again after 60s"
+			    time.sleep(60)
+
+        time.sleep(30)
+
+
