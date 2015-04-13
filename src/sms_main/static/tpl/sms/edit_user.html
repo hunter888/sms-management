@@ -1,0 +1,55 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Form Elements</h1>
+</div>
+<div class="wrapper-md" ng-controller="UserEditCtrl">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Edit User</div>
+        <div class="panel-body">
+          <form role="form">
+      <toaster-container toaster-options="{'position-class': 'toast-bottom-left', 'close-button':true}"></toaster-container>
+
+           <div class="form-group" ng-class="department_error">
+              <label>Role</label>
+              <select class="form-control" ng-model="role" ng-options="role.name group by role.shade for role in roles">
+        </select>
+            </div>
+
+
+      <div class="form-group" ng-class="firstname_error">
+              <label>First name</label>
+              <input type="text" class="form-control" placeholder="First Name" ng-model="user.firstname">
+            </div>
+            <div class="form-group" ng-class="lastname_error">
+               <label>Last name</label>
+              <input type="text" class="form-control" placeholder="Last Name" ng-model="user.lastname">
+            </div>
+      <div class="form-group" ng-class="username_error">
+              <label>Username</label>
+              <input type="text" class="form-control" placeholder="Username" ng-model="user.username">
+            </div>
+
+     <div class="form-group" ng-class="email_error">
+              <label>Email Address</label>
+              <input type="text" class="form-control" placeholder="Email Address" ng-model="user.email">
+            </div>
+      <div class="form-group" ng-class="form_success">
+               <label>Password</label>
+              <input type="password" class="form-control" placeholder="Password" ng-model="user.password" ng-change="change()">
+            </div>
+      <div class="form-group" ng-class="form_success">
+               <label>Confirm Password</label>
+              <input type="password" class="form-control" placeholder="Confirm Password" ng-model="confirm_password" ng-change="change()">
+            </div>
+
+<button type="submit" class="btn btn-sm btn-primary" ng-click="submitForm()" ng-disabled="!(password == confirm_password) || (!confirm_password || !password.length || !firstname.length || !lastname.length || !new_username.length || !email.length)"><i ng-class="spinnerClass" id="spin"></i> Submit</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

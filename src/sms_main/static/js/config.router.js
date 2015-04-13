@@ -24,6 +24,17 @@ angular.module('app')
                   url: '/app',
                   templateUrl: 'tpl/app.html'
               })
+       			.state('app.sms', {
+                  url: '/sms',
+                  templateUrl: 'tpl/app_sms.html',
+                  resolve: {
+                    deps: ['$ocLazyLoad',
+                      function( $ocLazyLoad ){
+                        return $ocLazyLoad.load(['js/controllers/chart.js']);
+                    }]
+                  }
+              })
+        
               .state('app.dashboard-v1', {
                   url: '/dashboard-v1',
                   templateUrl: 'tpl/app_dashboard_v1.html',
@@ -230,6 +241,180 @@ angular.module('app')
                       }]
                   }
               })
+              .state('app.users', {
+                  url: '/users',
+                  templateUrl: 'tpl/users.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['toaster']).then(
+                              function(){
+                                  return $ocLazyLoad.load(['js/controllers/users.js', 'js/services/users.js']);
+                              }
+                          );
+                      }]
+                  }
+              })
+
+              .state('app.new_user', {
+                  url: '/create',
+                  templateUrl: 'tpl/form_users.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad){
+                          return $ocLazyLoad.load('toaster').then(
+                              function(){
+                                 return $ocLazyLoad.load('js/controllers/users.js');
+                              }   
+                          );  
+                      }]  
+                  } 
+              })
+
+        .state('app.edit_user', {
+          url: '/user/:user_id/edit',
+          templateUrl: 'tpl/sms/edit_user.html',
+          resolve: {
+            deps: [ 'uiLoad', '$ocLazyLoad',
+            function(uiLoad,   $ocLazyLoad){
+              return uiLoad.load(['js/controllers/sms/user_edit.js','js/services/users.js']).then(function(){
+                return $ocLazyLoad.load('toaster');
+              });
+            }]
+          }
+        })
+
+
+              .state('app.create_sms', {
+                  url: '/create_sms',
+                  templateUrl: 'tpl/sms/create_sms.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad){
+                          return $ocLazyLoad.load(['toaster','ui.select']).then(
+                              function(){
+                                 return $ocLazyLoad.load(['js/controllers/sms/draft.js','js/services/phonebook.js']);
+                              }   
+                          );  
+                      }]  
+                  } 
+              })
+
+
+              .state('app.create_contact', {
+                  url: '/create_contact',
+                  templateUrl: 'tpl/sms/create_contact.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad){
+                          return $ocLazyLoad.load(['toaster','ui.select']).then(
+                              function(){
+                                 return $ocLazyLoad.load(['js/controllers/sms/phonebook.js','js/services/phonebook.js']);
+                              }   
+                          );  
+                      }]  
+                  } 
+              })
+
+
+
+              .state('app.inbox', {
+                  url: '/inbox',
+                  templateUrl: 'tpl/sms/inbox.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['toaster']).then(
+                              function(){
+                                  return $ocLazyLoad.load(['js/controllers/sms/inbox.js', 'js/services/inbox.js']);
+                              }
+                          );
+                      }]
+                  }
+              })
+
+              .state('app.outbox', {
+                  url: '/outbox',
+                  templateUrl: 'tpl/sms/outbox.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['toaster']).then(
+                              function(){
+                                  return $ocLazyLoad.load(['js/controllers/sms/outbox.js', 'js/services/outbox.js']);
+                              }
+                          );
+                      }]
+                  }
+              })
+         .state('app.sent', {
+                  url: '/sent',
+                  templateUrl: 'tpl/sms/sent.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['toaster']).then(
+                              function(){
+                                  return $ocLazyLoad.load(['js/controllers/sms/sent.js', 'js/services/outbox.js']);
+                              }
+                          );
+                      }]
+                  }
+              })
+         .state('app.failed', {
+                  url: '/failed',
+                  templateUrl: 'tpl/sms/failed.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['toaster']).then(
+                              function(){
+                                  return $ocLazyLoad.load(['js/controllers/sms/failed.js', 'js/services/outbox.js']);
+                              }
+                          );
+                      }]
+                  }
+              })
+
+        .state('app.draft', {
+                  url: '/draft',
+                  templateUrl: 'tpl/sms/draft.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['toaster']).then(
+                              function(){
+                                  return $ocLazyLoad.load(['js/controllers/sms/draft.js', 'js/services/outbox.js']);
+                              }
+                          );
+                      }]
+                  }
+              })
+
+   		.state('app.phonebook', {
+                  url: '/phonebook',
+                  templateUrl: 'tpl/sms/phonebook.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['toaster']).then(
+                              function(){
+                                  return $ocLazyLoad.load(['js/controllers/sms/phonebook.js', 'js/services/phonebook.js']);
+                              }
+                          );
+                      }]
+                  }
+              })
+
+
+
+
+
+
+
+
+
+
               // form
               .state('app.form', {
                   url: '/form',

@@ -18,6 +18,7 @@
     "HEADER" : "Navigation",
     "DASHBOARD" : "Dashboard",
     "CALENDAR" : "Calendar",
+    "USERS" : "Users",
     "EMAIL" : "Email",
     "WIDGETS" : "Widgets",
     "components" : {

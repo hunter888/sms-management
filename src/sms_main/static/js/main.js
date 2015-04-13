@@ -12,7 +12,7 @@ angular.module('app')
 
       // config
       $scope.app = {
-        name: 'Angulr',
+        name: 'SMS',
         version: '2.0.1',
         // for chart colors
         color: {
