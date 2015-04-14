@@ -2,7 +2,7 @@
 
 /* Controllers */
   // signin controller
-app.controller('SigninFormController', ['$scope', '$http', '$state', function($scope, $http, $state) {
+app.controller('SigninFormController', ['$scope','$rootScope', '$http', '$state', function($scope,$rootScope, $http, $state) {
     $scope.user = {};
     $scope.authError = null;
     $scope.login = function() {
@@ -12,8 +12,9 @@ app.controller('SigninFormController', ['$scope', '$http', '$state', function($s
       .then(function(response) {
         console.log(response.data)
         if ( !response.data.user ) {
-          $scope.authError = 'Email or Password not right';
+          $scope.authError = 'Username or Password not right';
         }else{
+           $rootScope.username = response.data.user;
           //$state.go('app.dashboard-v1');
           $state.go('app.inbox');
         }

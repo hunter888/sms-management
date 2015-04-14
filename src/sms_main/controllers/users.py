@@ -31,10 +31,21 @@ class Users:
 
         email = data['email']
         password = data['password']
-        retval = {
-		         'user' : email,
-		         'password' : password
-		    }
+        retval = { }
+
+
+        query_string = "SELECT * FROM %s WHERE username='%s' AND password='%s'" % (self.table, email, password)
+        print retval
+        res = lib.queryDB(self.db_config, query_string)
+        if (len(res)) :
+            retval = {
+		             'user' : email
+		        }
+        else:
+            retval = {
+               'error' : 'true'
+            }
+    
 
         return retval
 

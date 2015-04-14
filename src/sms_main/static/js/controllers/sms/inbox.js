@@ -3,6 +3,7 @@
 app.controller('InboxCtrl', ['$scope', '$rootScope','$state', '$http', '$modal','$window', 'Inbox', 'toaster', function($scope, $rootScope, $state, $http, $modal,$window, Inbox, toaster) {
   var inbox_id = $rootScope.$stateParams.inbox_id;
   var exportCSV = $rootScope.$stateParams.exportCSV;
+ $scope.username = $rootScope.username ;
  
 	$scope.reloadList = function () {
     Inbox.getAll().then(function(data){
