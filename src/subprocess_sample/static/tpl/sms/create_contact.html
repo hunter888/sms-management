@@ -1,0 +1,57 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Create Contact</h1>
+</div>
+<div class="wrapper-md" ng-controller="CreatePhonebookCtrl">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Create New Contact</div>
+        <div class="panel-body">
+          <form role="form">
+      <toaster-container toaster-options="{'position-class': 'toast-bottom-left', 'close-button':true}"></toaster-container>
+
+
+      <div class="form-group" ng-class="department_error">
+				<label>Deparment</label>
+       	<input type="text" class="form-control" placeholder="Enter Department" ng-model="department">
+			</div>
+
+      <div class="form-group" ng-class="name_error">
+				<label>Name</label>
+       	<input type="text" class="form-control" placeholder="Name" ng-model="name">
+			</div>
+
+
+      <div class="form-group" ng-class="mobile_number_error">
+				<label>Mobile Number</label>
+       	<input type="text" class="form-control" placeholder="Mobile Number" ng-model="mobile_number">
+			</div>
+
+      <div class="form-group" ng-class="rank_error">
+				<label>Rank</label>
+       	<input type="text" class="form-control" placeholder="Rank" ng-model="rank">
+			</div>
+
+      <div class="form-group" ng-class="designation_error">
+				<label>Designation</label>
+       	<input type="text" class="form-control" placeholder="Designation" ng-model="designation">
+			</div>
+
+
+      <div class="form-group" ng-class="home_address_error">
+				<label>Home Address</label>
+       	<input type="text" class="form-control" placeholder="Home Address" ng-model="home_address">
+			</div>
+
+
+
+<button type="submit" class="btn btn-sm btn-primary" ng-click="submitForm()" ng-disabled=" (!name.length || !mobile_number.length)"><i ng-class="spinnerClass" id="spin"></i> Save</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

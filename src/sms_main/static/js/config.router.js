@@ -285,6 +285,40 @@ angular.module('app')
         })
 
 
+	.state('app.serial_ports', {
+                  url: '/serial_ports',
+                  templateUrl: 'tpl/sms/serial_ports.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['toaster']).then(
+                              function(){
+                                  return $ocLazyLoad.load(['js/controllers/sms/serial.js', 'js/services/serial.js']);
+                              }
+                          );
+                      }]
+                  }
+              })
+
+
+	.state('app.modems', {
+                  url: '/modems',
+                  templateUrl: 'tpl/sms/modem.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load(['toaster']).then(
+                              function(){
+                                  return $ocLazyLoad.load(['js/controllers/sms/modem.js', 'js/services/serial.js']);
+                              }
+                          );
+                      }]
+                  }
+              })
+
+
+
+
               .state('app.create_sms', {
                   url: '/create_sms',
                   templateUrl: 'tpl/sms/create_sms.html',

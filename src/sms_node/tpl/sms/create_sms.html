@@ -1,0 +1,49 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Create SMS</h1>
+</div>
+<div class="wrapper-md" ng-controller="CreateSMSCtrl">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Create New SMS</div>
+        <div class="panel-body">
+          <form role="form">
+      <toaster-container toaster-options="{'position-class': 'toast-bottom-left', 'close-button':true}"></toaster-container>
+
+           <div class="form-group" ng-class="priority_error">
+              <label>Priority</label>
+              <select class="form-control" ng-model="priority" ng-options="priority.name group by priority.shade for priority in priorities">
+        </select>
+            </div>
+
+
+
+
+      <div class="form-group" ng-class="recipient_error">
+         <label> Recipient</label>
+        <ui-select ng-model="person.selected" theme="bootstrap">
+            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="item in people | filter: $select.search">
+              <div ng-bind-html="item.name | highlight: $select.search"></div>
+              <small ng-bind-html="item.primary_number | highlight: $select.search"></small>
+            </ui-select-choices>
+          </ui-select>
+			</div>
+
+
+
+      <div class="form-group" ng-class="message_error">
+              <label>Message</label>
+              <input type="text" class="form-control" placeholder="Enter Message..." ng-model="message">
+			</div>
+<button type="submit" class="btn btn-sm btn-primary" ng-click="submitForm()" ng-disabled=" (!message.length)"><i ng-class="spinnerClass" id="spin"></i> Send</button>
+<button type="submit" class="btn btn-sm btn-info" ng-click="saveAsDraft()" ng-disabled=" (!message.length)"><i ng-class="spinnerClass" id="spin"></i> Save as Draft</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

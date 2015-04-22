@@ -1,0 +1,87 @@
+<!-- list -->
+<ul class="nav">
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span translate="aside.nav.HEADER">Navigation</span>
+  </li>
+  <li ui-sref-active="active">
+    <a ui-sref="app.inbox">
+      <i class="glyphicon glyphicon-envelope icon text-info-lter"></i>
+      <span class="font-bold">Inbox</span>
+    </a>
+  </li>
+  <li ui-sref-active="active">
+    <a ui-sref="app.outbox">
+      <i class="glyphicon glyphicon-share icon text-info-lter"></i>
+      <span class="font-bold">Outbox</span>
+    </a>
+  </li>
+  <li ui-sref-active="active">
+    <a ui-sref="app.sent">
+      <i class="glyphicon glyphicon-ok icon text-info-lter"></i>
+      <span class="font-bold">Sent Items</span>
+    </a>
+  </li>
+  <li ui-sref-active="active">
+    <a ui-sref="app.failed">
+      <i class="glyphicon  glyphicon-warning-sign icon text-info-lter"></i>
+      <span class="font-bold">Failed Messages</span>
+    </a>
+  </li>
+  <li ui-sref-active="active">
+    <a ui-sref="app.draft">
+      <i class="glyphicon glyphicon-file icon text-info-lter"></i>
+      <span class="font-bold">Draft/Create </span>
+    </a>
+  </li>
+
+
+
+  <li class="line dk"></li>
+ <li ui-sref-active="active">
+    <a ui-sref="app.phonebook">
+      <i class="glyphicon glyphicon-phone icon text-info-lter"></i>
+      <span class="font-bold">Phonebook</span>
+    </a>
+  </li>
+
+<!--
+ <li ui-sref-active="active">
+    <a ui-sref="app.users">
+      <i class="glyphicon glyphicon-th-list icon text-info-lter"></i>
+      <span class="font-bold">Groups</span>
+    </a>
+  </li>
+
+-->
+
+
+  <li class="line dk"></li>
+
+
+  <li ui-sref-active="active">
+    <a ui-sref="app.users">
+      <i class="fa fa-users icon text-info-dker"></i>
+      <span class="font-bold" >Admin Users</span>
+    </a>
+  </li>
+
+   
+  <li ui-sref-active="active">
+    <a ui-sref="app.modems">
+      <i class="fa fa-users icon text-info-dker"></i>
+      <span class="font-bold" >Modems</span>
+    </a>
+  </li>
+
+  
+  <li ui-sref-active="active">
+    <a ui-sref="app.serial_ports">
+      <i class="fa fa-users icon text-info-dker"></i>
+      <span class="font-bold" >USB/Serial Ports</span>
+    </a>
+  </li>
+
+
+
+</ul>
+<!-- / list -->

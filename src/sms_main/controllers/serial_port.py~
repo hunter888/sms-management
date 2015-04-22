@@ -1,0 +1,29 @@
+from bottle import template, request
+import json
+from controllers import lib
+import serial
+
+
+
+
+class SerialPort:
+    def __init__(self, config):
+        self.db_config = config
+
+    def scan(self):
+        # scan for available ports. return a list of tuples (num, name)
+        available = []
+        for i in range(256):
+            try:
+                s = serial.Serial(i)
+                print s
+                available.append(s)
+                s.close()
+            except serial.SerialException:
+                pass
+        return available
+
+    def all(self):
+	self.scan()
+
+

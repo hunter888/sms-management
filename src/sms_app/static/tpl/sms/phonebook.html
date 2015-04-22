@@ -1,0 +1,83 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Phonebook</h1>
+</div>
+<div class="wrapper-md" ng-controller="PhonebookCtrl">
+<script type="text/ng-template" id="deleteModal">
+      <div ng-include="'tpl/sms/modal/delete_modal.html'"></div>
+    </script>
+  <toaster-container toaster-options="{'position-class': 'toast-bottom-left', 'close-button':true}"></toaster-container>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Contacts Table
+    </div>
+    <div class="row wrapper">
+      <div class="col-sm-5 m-b-xs">
+        <a ui-sref="app.create_contact"  class="btn btn-sm btn-success">Create Contact </a>
+      </div>
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-3">
+        <div class="input-group">
+          <input id="filter" type="text" class="input-sm form-control" placeholder="Search">
+          <span class="input-group-btn">
+            <button class="btn btn-sm btn-default" type="button">Go!</button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped b-t b-light" ui-jq="footable" data-filter="#filter" data-page-size="25">
+        <thead>
+          <tr>
+            <th data-toggle="true">Department </th>
+            <th>Name</th>
+            <th>Primary Number</th>
+            <th>Rank</th>
+            <th>Designation</th>
+            <th>Home Address</th>
+            <th class="pull-right">Actions</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr ng-repeat="_data in data_list">
+              <td>{{_data.department}}</td>
+              <td>{{_data.name}}</td>
+              <td>{{_data.primary_number}}</td>
+              <td>{{_data.rank}}</td>
+              <td>{{_data.designation}}</td>
+              <td>{{_data.home_address}}</td>
+
+        <td class="pull-right">
+			<button class="btn m-b-xs btn-info btn-addon" ng-click="archiveOutbox(_data)"><i class="fa fa-archive"></i>Archive</button>
+			<button class="btn m-b-xs btn-danger btn-addon" ng-click="deleteOutbox(_data)"><i class="glyphicon glyphicon-trash"></i> Delete</button>
+				</td>
+
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="panel-footer">
+      <div class="row">
+        <div class="col-sm-4 hidden-xs">
+        </div>
+        <div class="col-sm-4 text-center">
+         <!-- <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small> -->
+        </div>
+        <div class="col-sm-4 text-right text-center-xs">                
+          <ul class="pagination pagination-sm m-t-none m-b-none">
+            <li><a href><i class="fa fa-chevron-left"></i></a></li>
+            <li><a href>1</a></li>
+            <li><a href>2</a></li>
+            <li><a href>3</a></li>
+            <li><a href>4</a></li>
+            <li><a href>5</a></li>
+            <li><a href><i class="fa fa-chevron-right"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>

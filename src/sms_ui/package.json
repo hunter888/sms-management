@@ -1,0 +1,9 @@
+{
+  "name" :"sms",
+  "window" : {
+  	"width": 1200,
+	"height" :750,
+	"toolbar" :false
+  },
+  "main" : "index.html"
+}

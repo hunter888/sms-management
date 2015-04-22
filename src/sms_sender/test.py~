@@ -1,0 +1,13 @@
+
+
+import sms
+
+def testsms ():
+    m = sms.Modem('COM18')
+    m.send('+639175991688'.encode('ascii', 'ignore'), 'This is a message')
+    msgs = m.messages()
+    for msg in msgs:
+        print msg
+
+print "waaa"
+testsms()

@@ -1,0 +1,23 @@
+<html>
+<head> <title>SMS</title>
+</head>
+<body>
+<script>
+
+
+var currentWindow = gui.Window.get(); // Get reference to loading.html
+
+var exec = require('child_process').execFile;
+exec('main_sms.exe', {cwd:'.'}, function (error, stdout, stderr){ // Runs your python code
+		alert("run code");
+);
+appWindow.on('loaded', function() { // Waits for application to be loaded
+  currentWindow.close({force: 'true'}); // Closes loading.html
+window.location = "http://localhost:8081/main/index.html"
+  //  appWindow.show();  // Shows app.html
+  //  appWindow.focus(); // Set the focus on app.html
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+from bottle import template, request
+import json
+from controllers import lib
+import re
+import _winreg as winreg
+import itertools
+
+
+
+class SerialPort:
+    def __init__(self, config):
+        self.db_config = config
+        self.table = "modems"
+
+
+    def getInfo (self, data):
+        temp = { 
+            'id' : data[0],
+            'portname' : data[1],
+            'status' : data[2],
+            'network' : data[3],
+            'balance' : data[4],
+            'mobile_number' : data[5],
+            'usb_id' : data[6],
+            'model' : data[7],
+            'isNotAvailable' : data[8],
+        }
+        return temp
+
+    def getAllDevices(self):
+        query_string = "SELECT * FROM %s" % self.table
+        db_data = lib.queryDB(self.db_config, query_string)
+       
+        data_list = []
+        for data in db_data:
+            print data
+            temp_data = self.getInfo(data)
+            data_list.append(temp_data)
+        return json.dumps(data_list)
+
+			
+    def get(self, _id):
+        query_string = "SELECT * FROM %s WHERE id=%s" % (self.table,str(_id))
+        db_data = lib.queryDB(self.db_config, query_string)
+       
+        data_list = []
+        for data in db_data:
+            temp_data = self.getInfo(data)
+            data_list.append(temp_data)
+
+        return json.dumps(data_list)
+
+    def delete (self, _id):
+        print "inbox_id", _id
+        query_string = "DELETE FROM %s WHERE id=%s" % (self.table, str(_id))
+        lib.execDB(self.db_config, query_string)
+
+        retval = {
+            'success' : 'true'
+        }
+
+        return retval
+
+    def create(self):
+        retval = {
+            'success' : 'false'
+        }
+        name = request.query.name
+        network = request.query.network
+        query_string = "INSERT INTO %s (portname, status, balance, network" % self.table
+        query_string += " ) VALUES "
+        query_string += "('%s', 'initializing', '0.00', '%s')" % (name, network)
+        lib.execDB(self.db_config, query_string)
+
+        retval = {
+            'success' : 'true'
+        }
+
+        return retval
+
+
+
+    def scan(self):
+        # scan for available ports. return a list of tuples (num, name)
+        path = 'HARDWARE\\DEVICEMAP\\SERIALCOMM'
+	available = []
+	count = 0
+        try:
+            key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, path)
+        except WindowsError:
+	    print "WindowsError"
+            return available
+        for i in itertools.count():
+            try:
+                val = winreg.EnumValue(key, i)
+                print val
+                print str(val[1])
+
+		temp_data = {
+                    "id" : count,
+		    "name" : str(val[1])
+		}
+                available.append(temp_data)
+            except EnvironmentError:
+                break
+
+        return available
+
+    def all(self):
+	return json.dumps(self.scan())
+
+    def addAsModem(self):
+	retval = self.create()
+	return json.dumps(retval)
+
